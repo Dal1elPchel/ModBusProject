@@ -1,0 +1,6 @@
+Hello from Master!
+
+This is a test file.
+Testing COM port communication.
+Testing ACK responses.
+END should be received correctly.
