@@ -1,4 +1,3 @@
-
 #pragma once
 #define NOMINMAX
 
@@ -37,7 +36,7 @@ private:
         }
     }
 
-    void configure()
+    void configure(int baudRate)
     {
         DCB dcb = {};
         dcb.DCBlength = sizeof(dcb);
@@ -51,7 +50,7 @@ private:
             );
         }
 
-        dcb.BaudRate = CBR_9600;
+        dcb.BaudRate = baudRate;
         dcb.ByteSize = 8;
         dcb.StopBits = ONESTOPBIT;
         dcb.Parity = NOPARITY;
@@ -166,13 +165,13 @@ private:
 
 protected:
 
-    SerialPort(const std::string& portName)
+    SerialPort(const std::string& portName, int baudRate)
     {
         open(portName);
 
         try
         {
-            configure();
+            configure(baudRate);
         }
         catch (...)
         {

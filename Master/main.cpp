@@ -1,4 +1,5 @@
 #include "Client.h"
+#include <iostream>
 
 int main()
 {
@@ -6,14 +7,13 @@ int main()
 
     try
     {
-        Client master("COM4");
+        Client master("COM7", 9600); //COM4
 
         master.SendFile("test.txt", 1024);
     }
     catch (const std::exception& e)
     {
-        std::cerr << "Error: "
-            << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
     }
 
     return 0;

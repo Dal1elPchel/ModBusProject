@@ -1,24 +1,16 @@
 #pragma once
+#include "SerialPort.h"
 #include <windows.h>
 #include <vector>
 #include <string>
 
-class Server
+class Server : public SerialPort
 {
 private:
-    HANDLE hComPort;
-    std::string comPortName;
-    int baudRate;
-
-    static inline size_t BUFFER_SIZE = 1024;
-
-    bool receiveData(std::vector<char>& data, size_t bufferSize);
-    bool sendAck(char ackType);
+    void sendAck(char ackType);
 
 public:
-    Server(const std::string& port, int rate);
-    ~Server();
+    Server(const std::string& portName, int baudRate);
 
-    bool openPort();
-    bool receiveFile(const std::string& outputPath, size_t chunkSize = BUFFER_SIZE);
+    void receiveFile(const std::string& outputPath, size_t chunkSize = 1024);
 };

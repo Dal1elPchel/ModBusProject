@@ -4,15 +4,20 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    Server server("COM5", 9600);
 
-    if (!server.openPort())
-        return 1;
+    try
+    {
+        Server server("COM8", 9600); // COM5
 
-    std::cout << "Slave waiting..." << std::endl;
+        std::cout << "Slave waiting..." << std::endl;
 
-    if (server.receiveFile("received.txt", 1024))
+        server.receiveFile("received.txt", 1024);
         std::cout << "File received!" << std::endl;
-
+        
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
     return 0;
 }
